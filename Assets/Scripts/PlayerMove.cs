@@ -11,6 +11,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] float glide = 800f;
 
     [SerializeField] bool isJumping;
+    [SerializeField] bool isClimbing;
+    [SerializeField] bool isGliding;
 
     [SerializeField] Collider2D climbCheckCollider;
     [SerializeField] Collider2D groundCheckCollider;
@@ -20,10 +22,11 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        //Déplacements
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
-        if (x != 0)
+        if (x != 0 && !isClimbing)
         {
             if (!isJumping)
             {
@@ -44,12 +47,22 @@ public class PlayerMove : MonoBehaviour
                 character.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
                 character.transform.localPosition = new Vector3(-0.23f, -0.575f, 0.15f);
             }
+
+
+            if (Input.GetKey(KeyCode.LeftShift) && !isGliding)
+            {
+                transform.position += new Vector3(x, 0, 0) * run * Time.deltaTime;
+            }
+            else
+            {
+                transform.position += new Vector3(x, 0, 0) * speed * Time.deltaTime;
+            }
         }
         else
             character.SetBool("Running", false);
 
 
-
+        //Saute
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (groundCheckCollider.IsTouchingLayers(groundCheck))
@@ -62,52 +75,45 @@ public class PlayerMove : MonoBehaviour
             }
             else if (climbCheckCollider.IsTouchingLayers(groundCheck))
             {
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(x * jump, jump));
+                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(x * jump/2, jump));
                 isJumping = true;
             }
         }
 
-        if (groundCheckCollider.IsTouchingLayers(groundCheck) && isJumping == false)
-        {
-            print("touch floor");
-            character.SetBool("Jumping", false);
-        }
-
-
-
+        //Chute
         if (gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
             isJumping = false;
+        if (groundCheckCollider.IsTouchingLayers(groundCheck) && isJumping == false)
+            character.SetBool("Jumping", false);
+        
 
 
 
+
+
+        //Escalade
         if (climbCheckCollider.IsTouchingLayers(groundCheck))
         {
             gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+            gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.position += new Vector3(0, y, 0) * climb * Time.deltaTime;
+            isClimbing = true;
         }
         else 
         {
             gameObject.GetComponent<Rigidbody2D>().gravityScale = 2;
+            isClimbing = false;
         }
 
 
 
-
+        //Planne
         if (Input.GetKey(KeyCode.Space) && !groundCheckCollider.IsTouchingLayers(groundCheck) && !isJumping)
         {
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, glide * Time.deltaTime));
-        }
-
-
-
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            transform.position += new Vector3(x, 0, 0) * run * Time.deltaTime;
+            isGliding = true;
         }
         else
-        {
-            transform.position += new Vector3(x, 0, 0) * speed * Time.deltaTime;
-        }
+            isGliding = false;
     }
 }
