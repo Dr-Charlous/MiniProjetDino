@@ -532,7 +532,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 192609304}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3446,7 +3446,7 @@ MonoBehaviour:
   groundCheck:
     serializedVersion: 2
     m_Bits: 64
-  character: {fileID: 0}
+  character: {fileID: 1670789330453108785}
 --- !u!4 &1168247131
 Transform:
   m_ObjectHideFlags: 0
@@ -5202,6 +5202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1670789330453108784}
+  - component: {fileID: 1670789330453108785}
   m_Layer: 0
   m_Name: Joueur_fusion_lumiere
   m_TagString: Untagged
@@ -5243,7 +5244,7 @@ MonoBehaviour:
   - {fileID: 8021504926341496125}
   - {fileID: 7743643942221297978}
   m_Bounds:
-    m_Center: {x: -0.000000014901161, y: -0.000000029802322, z: 0}
+    m_Center: {x: -0.000000014901161, y: 0.00000020861626, z: 0}
     m_Extent: {x: 0.16000001, y: 0.3158334, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -5405,7 +5406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569652438540271699}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25, y: -0.58500004, z: 0}
+  m_LocalPosition: {x: -0.25, y: -0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5419,6 +5420,27 @@ Transform:
   m_Father: {fileID: 1168247131}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1670789330453108785
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569652438540271699}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 32e031491055dfc4c9dc7f028753a422, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1677408842359148729
 GameObject:
   m_ObjectHideFlags: 0
@@ -5680,8 +5702,8 @@ MonoBehaviour:
   - {fileID: 4061953282973393877}
   - {fileID: 8108172458250128212}
   m_Bounds:
-    m_Center: {x: -0.0017075688, y: -0.00000011175871, z: 0}
-    m_Extent: {x: 0.10799083, y: 0.102499895, z: 0}
+    m_Center: {x: -0.0017075688, y: 0.000000007450581, z: 0}
+    m_Extent: {x: 0.10799083, y: 0.10250001, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -5693,7 +5715,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386791140949368968}
   m_LocalRotation: {x: 0, y: 0, z: 0.10091237, w: 0.99489534}
-  m_LocalPosition: {x: 0.2612021, y: 0.70518255, z: 0}
+  m_LocalPosition: {x: 0.2612021, y: 0.7051826, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5967,8 +5989,8 @@ MonoBehaviour:
   - {fileID: 7108655018954148107}
   - {fileID: 6074972072123058355}
   m_Bounds:
-    m_Center: {x: 0, y: -0.000425905, z: 0}
-    m_Extent: {x: 0.16250002, y: 0.33653268, z: 0}
+    m_Center: {x: 0, y: -0.0004260242, z: 0}
+    m_Extent: {x: 0.16250002, y: 0.33653256, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -6043,8 +6065,8 @@ MonoBehaviour:
   - {fileID: 2002351549953032582}
   - {fileID: 311580695805527164}
   m_Bounds:
-    m_Center: {x: 0.0001219511, y: 0.00031927228, z: 0}
-    m_Extent: {x: 0.82487833, y: 0.42384762, z: 0}
+    m_Center: {x: 0.0001219511, y: 0.00031924248, z: 0}
+    m_Extent: {x: 0.82487833, y: 0.4238476, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -6280,8 +6302,8 @@ MonoBehaviour:
   - {fileID: 7982190426525930064}
   - {fileID: 7166031464192432369}
   m_Bounds:
-    m_Center: {x: -0.00030571222, y: -0.0004926324, z: 0}
-    m_Extent: {x: 0.082194164, y: 0.10151905, z: 0}
+    m_Center: {x: -0.00030571222, y: -0.0004925132, z: 0}
+    m_Extent: {x: 0.082194164, y: 0.10151917, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0

@@ -32,20 +32,19 @@ public class PlayerMove : MonoBehaviour
             {
                 character.SetBool("Running", true);
                 character.SetBool("Jumping", false);
-                character.SetBool("Idling", false);
             }
             
 
             if (x < 0)
             {
-                character.transform.localScale = new Vector3(-0.15f, 0.15f, 0.15f);
-                character.transform.localPosition = new Vector3(0.23f, -0.575f, 0.15f);
+                character.transform.localScale = new Vector3(-1, 1, 1);
+                character.transform.localPosition = new Vector3(0.25f, -0.6f, 1);
 
             }
             if (x > 0)
             {
-                character.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
-                character.transform.localPosition = new Vector3(-0.23f, -0.575f, 0.15f);
+                character.transform.localScale = new Vector3(1, 1, 1);
+                character.transform.localPosition = new Vector3(-0.25f, -0.6f, 1);
             }
 
 
@@ -70,21 +69,29 @@ public class PlayerMove : MonoBehaviour
                 gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jump));
                 character.SetBool("Running", false);
                 character.SetBool("Jumping", true);
-                character.SetBool("Idling", false);
+                character.SetTrigger("JumpingT");
                 isJumping = true;
             }
             else if (climbCheckCollider.IsTouchingLayers(groundCheck))
             {
                 gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(x * jump/2, jump));
+                character.SetBool("Running", false);
+                character.SetBool("Jumping", true);
+                character.SetTrigger("JumpingT");
                 isJumping = true;
             }
         }
 
         //Chute
         if (gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)
+        {
             isJumping = false;
-        if (groundCheckCollider.IsTouchingLayers(groundCheck) && isJumping == false)
             character.SetBool("Jumping", false);
+        }
+        if (groundCheckCollider.IsTouchingLayers(groundCheck) && isJumping == false)
+        {
+            character.SetBool("Gliding", false);
+        }
         
 
 
@@ -112,8 +119,11 @@ public class PlayerMove : MonoBehaviour
         {
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, glide * Time.deltaTime));
             isGliding = true;
+            character.SetBool("Gliding", true);
         }
         else
+        {
             isGliding = false;
+        }
     }
 }
