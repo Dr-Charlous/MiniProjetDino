@@ -124,6 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a21cb0e191ec045ba1a686011343fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  playerStats: {fileID: 0}
+  player: {fileID: 6481198344841024278, guid: 831f95af9b1bfdf48b2c3a20bb11b801, type: 3}
+  playerStats: {fileID: 6481198344841024272, guid: 831f95af9b1bfdf48b2c3a20bb11b801, type: 3}
   gain: 1
