@@ -1,17 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] int lifePoints;
-    [SerializeField] int lifePointMax;
+    public int lifePoints;
+    public int lifePointMax;
     [SerializeField] GameObject[] lifes;
+
     [SerializeField] Transform respawn;
+
+    public int Souls;
+    public TextMeshProUGUI soulsText;
+
 
     private void Start()
     {
         lifePoints = lifePointMax;
+        soulsText.text = "0";
 
         foreach (var item in lifes)
         {
@@ -24,15 +31,10 @@ public class PlayerStats : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             lifePoints = GetHurt(lifePoints, 1);
-
-            if (lifePointMax - lifePoints > 0)
-            {
-                for (int i = 0; i < lifePointMax - lifePoints; i++)
-                {
-                    lifes[lifes.Length - 1 - i].SetActive(false);
-                }
-            }
+            LifeAff();
         }
+
+        
 
         if (lifePoints <= 0)
         {
@@ -58,5 +60,17 @@ public class PlayerStats : MonoBehaviour
         }
 
         gameObject.transform.position = respawn.position;
+    }
+
+    public void LifeAff()
+    {
+        for (int i = 0; i < lifePointMax - lifePoints; i++)
+        {
+            lifes[lifes.Length - 1 - i].SetActive(false);
+        }
+        for (int i = 0; i < lifePoints; i++)
+        {
+            lifes[i].SetActive(true);
+        }
     }
 }
