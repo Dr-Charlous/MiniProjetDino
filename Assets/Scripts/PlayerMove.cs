@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] bool isGliding;
 
     [SerializeField] Collider2D climbCheckCollider;
+    [SerializeField] LayerMask climbCheck;
     [SerializeField] Collider2D groundCheckCollider;
     [SerializeField] LayerMask groundCheck;
 
@@ -33,28 +34,32 @@ public class PlayerMove : MonoBehaviour
                 character.SetBool("Running", true);
                 character.SetBool("Jumping", false);
             }
-            
+
 
             if (x < 0)
             {
-                character.transform.localScale = new Vector3(-1, 1, 1);
-                character.transform.localPosition = new Vector3(0.25f, -0.6f, 1);
+                character.transform.localScale = new Vector3(-1, 1, 0);
+                character.transform.localPosition = new Vector3(0.25f, -0.6f, 0);
 
             }
             if (x > 0)
             {
-                character.transform.localScale = new Vector3(1, 1, 1);
-                character.transform.localPosition = new Vector3(-0.25f, -0.6f, 1);
+                character.transform.localScale = new Vector3(1, 1, 0);
+                character.transform.localPosition = new Vector3(-0.25f, -0.6f, 0);
             }
 
 
             if (Input.GetKey(KeyCode.LeftShift) && !isGliding)
             {
                 transform.position += new Vector3(x, 0, 0) * run * Time.deltaTime;
+                //if ((gameObject.GetComponent<Rigidbody2D>().velocity.x < x * run * Time.deltaTime) || (gameObject.GetComponent<Rigidbody2D>().velocity.x < x * -run * Time.deltaTime))
+                //    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(x * run * Time.deltaTime, 0));
             }
             else
             {
                 transform.position += new Vector3(x, 0, 0) * speed * Time.deltaTime;
+                //if ((gameObject.GetComponent<Rigidbody2D>().velocity.x < x * speed * Time.deltaTime) || (gameObject.GetComponent<Rigidbody2D>().velocity.x < x * -speed * Time.deltaTime))
+                //    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(x * speed * Time.deltaTime, 0));
             }
         }
         else
@@ -72,7 +77,7 @@ public class PlayerMove : MonoBehaviour
                 character.SetTrigger("JumpingT");
                 isJumping = true;
             }
-            else if (climbCheckCollider.IsTouchingLayers(groundCheck))
+            else if (climbCheckCollider.IsTouchingLayers(climbCheck))
             {
                 gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(x * jump/2, jump));
                 character.SetBool("Running", false);
@@ -99,7 +104,7 @@ public class PlayerMove : MonoBehaviour
 
 
         //Escalade
-        if (climbCheckCollider.IsTouchingLayers(groundCheck))
+        if (climbCheckCollider.IsTouchingLayers(climbCheck))
         {
             gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -117,7 +122,7 @@ public class PlayerMove : MonoBehaviour
 
 
         //Planne
-        if (Input.GetKey(KeyCode.Space) && !groundCheckCollider.IsTouchingLayers(groundCheck) && !isJumping)
+        if (Input.GetKey(KeyCode.Space) && (!groundCheckCollider.IsTouchingLayers(groundCheck) && !groundCheckCollider.IsTouchingLayers(climbCheck)) && !isJumping)
         {
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, glide * Time.deltaTime));
             isGliding = true;
