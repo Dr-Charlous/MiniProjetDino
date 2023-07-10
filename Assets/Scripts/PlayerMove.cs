@@ -105,11 +105,13 @@ public class PlayerMove : MonoBehaviour
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.position += new Vector3(0, y, 0) * climb * Time.deltaTime;
             isClimbing = true;
+            character.SetBool("Climbing", true);
         }
         else 
         {
             gameObject.GetComponent<Rigidbody2D>().gravityScale = 2;
             isClimbing = false;
+            character.SetBool("Climbing", false);
         }
 
 
