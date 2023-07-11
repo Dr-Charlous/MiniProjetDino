@@ -51,20 +51,18 @@ public class PlayerMove : MonoBehaviour
 
             if (Input.GetKey(KeyCode.LeftShift) && !isGliding)
             {
-                transform.position += new Vector3(x, 0, 0) * run * Time.deltaTime;
-                //if ((gameObject.GetComponent<Rigidbody2D>().velocity.x < x * run * Time.deltaTime) || (gameObject.GetComponent<Rigidbody2D>().velocity.x < x * -run * Time.deltaTime))
-                //    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(x * run * Time.deltaTime, 0));
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(x * 100 * run * Time.deltaTime, gameObject.GetComponent<Rigidbody2D>().velocity.y);
             }
             else
             {
-                transform.position += new Vector3(x, 0, 0) * speed * Time.deltaTime;
-                //if ((gameObject.GetComponent<Rigidbody2D>().velocity.x < x * speed * Time.deltaTime) || (gameObject.GetComponent<Rigidbody2D>().velocity.x < x * -speed * Time.deltaTime))
-                //    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(x * speed * Time.deltaTime, 0));
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(x * 100 * speed * Time.deltaTime, gameObject.GetComponent<Rigidbody2D>().velocity.y);
             }
         }
         else
+        {
             character.SetBool("Running", false);
-
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, gameObject.GetComponent<Rigidbody2D>().velocity.y);
+        }
 
         //Saute
         if (Input.GetKeyDown(KeyCode.Space))
